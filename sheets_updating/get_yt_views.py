@@ -1,6 +1,7 @@
 import pandas as pd
 import sqlite3 
 import os
+import sqlite3
 from datetime import date
 from urllib.parse import urlparse, parse_qs
 from dotenv import load_dotenv
@@ -63,14 +64,5 @@ tab.clear()
 set_with_dataframe(tab, df)
 
 
-
-
-#writting to summary
-
-
-
-
-
 conn.commit()
-
 conn.close()
