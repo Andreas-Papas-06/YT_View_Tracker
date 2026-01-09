@@ -11,6 +11,9 @@ items = c.fetchall()
 for item in items:
     print(item)
 print("====================================================================")
+c.execute("DELETE FROM views")
+conn.commit()
+
 c.execute("SELECT * FROM views")
 
 items = c.fetchall()
