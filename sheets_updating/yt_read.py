@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 import sqlite3
 from datetime import date
+import json
+import os
 
 def get_video_input():
     SCOPES = [
@@ -9,8 +11,10 @@ def get_video_input():
         "https://www.googleapis.com/auth/drive"
     ]
 
-    creds = Credentials.from_service_account_file(
-        'sheets_updating/google-creds.json',
+    creds_dict = json.loads(os.environ["GOOGLE_CREDS_JSON"])
+
+    creds = Credentials.from_service_account_info(
+        creds_dict,
         scopes=SCOPES
     )
 

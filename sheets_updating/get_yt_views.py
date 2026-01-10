@@ -9,6 +9,7 @@ from googleapiclient.discovery import build
 import gspread
 from gspread_dataframe import set_with_dataframe
 from google.oauth2.service_account import Credentials
+import json
 
 def get_views():
     #getting views for each video and adding to db
@@ -19,7 +20,7 @@ def get_views():
     items = c.fetchall()
 
     load_dotenv()
-    API_KEY = os.getenv("YT_API_KEY")
+    API_KEY = os.getenv("YOUTUBE_API_KEY")
     youtube = build("youtube", "v3", developerKey=API_KEY)
 
     def get_video_id(url):
@@ -51,8 +52,10 @@ def get_views():
         "https://www.googleapis.com/auth/drive"
     ]
 
-    creds = Credentials.from_service_account_file(
-        'sheets_updating/google-creds.json',
+    creds_dict = json.loads(os.environ["GOOGLE_CREDS_JSON"])
+
+    creds = Credentials.from_service_account_info(
+        creds_dict,
         scopes=SCOPES
     )
 
